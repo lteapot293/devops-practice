@@ -1,0 +1,6 @@
+---
+- name: Перезапуск Nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes

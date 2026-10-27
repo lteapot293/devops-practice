@@ -1,0 +1,20 @@
+---
+- name: Обновление кэша репозиториев apt
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Установка стандартного набора системных пакетов
+  apt:
+    name:
+      - net-tools
+      - dnsutils
+      - wget
+      - curl
+      - mc
+      - rsync
+    state: present
+
+- name: Изменение имени машины согласно инвентарю
+  hostname:
+    name: "{{ inventory_hostname }}"

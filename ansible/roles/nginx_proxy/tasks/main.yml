@@ -1,0 +1,16 @@
+---
+- name: Установка веб-сервера Nginx для проксирования
+  apt:
+    name: nginx
+    state: present
+
+- name: Удаление стандартного дефолтного сайта Nginx на 80 порту
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Накатывание конфигурации проксирования на порт 3000
+  template:
+    src: proxy.conf.j2
+    dest: /etc/nginx/sites-enabled/proxy.conf
+  notify: Перезапуск Nginx

@@ -1,0 +1,19 @@
+---
+- name: Установка веб-сервера Nginx на бэкендах
+  apt:
+    name: nginx
+    state: present
+
+- name: Создание кастомной страницы приветствия из шаблона
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: '0644'
+
+- name: Перезапуск и включение службы Nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
